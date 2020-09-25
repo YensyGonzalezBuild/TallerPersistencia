@@ -5,12 +5,12 @@ import co.edu.unbosque.view.View;
 
 public class Controller {
 	
-	private View gui;
+//	private View gui;
 	private EjercicioArchivo m;
 	
 	public Controller() {
 		m = new EjercicioArchivo();
-		gui = new View();
+//		gui = new View();
 		
 //		gui.escribirDato(m.gestionarArchivoCadena());
 //		gui.escribirDato(m.gestionarPropiedades());

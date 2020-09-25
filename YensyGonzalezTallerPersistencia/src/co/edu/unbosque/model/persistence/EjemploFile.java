@@ -71,13 +71,20 @@ public class EjemploFile {
 		
 		String fileName ="";
 		
+		// Delete all entries from files 
+		
+		this.fileWipe("interns");
+		this.fileWipe("managers");
+		this.fileWipe("employees");
+		this.fileWipe("master");
+		
 		for(int n = 0; n < this.documents.length; n++) {
 			
 			if (this.salaries[n] <= 2000) {taxRate = 0.10; fileName="interns";}
 
 			if (this.salaries[n] > 5000) {taxRate = 0.20; fileName="managers";}
 
-			if (this.salaries[n] >= 2000 || this.salaries[n] <= 5000) {taxRate = 0.15; fileName="employees";}
+			if (this.salaries[n] > 2000 && this.salaries[n] <= 5000) {taxRate = 0.15; fileName="employees";}
 			
 			netSalary = this.salaries[n] - (this.salaries[n] * taxRate);
 			
@@ -87,9 +94,19 @@ public class EjemploFile {
 			
 			this.generatePayslips(payslipEntry, fileName);
 			
+			this.generatePayslips(this.documents[n]+", "+this.names[n], "master");
+			
 		}
 
 
+	}
+	
+	public void fileWipe(String fileName) {
+		
+		File f = new File(this.dataRoute+fileName+".txt");
+		
+		f.delete();
+		
 	}
 
 	public boolean generatePayslips(String entry, String fileName) {
@@ -98,7 +115,9 @@ public class EjemploFile {
 		
 		try {
 			
-			FileWriter fw = new FileWriter(f);
+			f.createNewFile();
+			
+			FileWriter fw = new FileWriter(f, true);
 			PrintWriter pw = new PrintWriter(fw);
 			
 			pw.println(entry);
